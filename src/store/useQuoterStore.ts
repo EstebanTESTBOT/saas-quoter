@@ -129,6 +129,11 @@ interface QuoterState {
   fetchQuotesList: () => Promise<void>;
   loadQuoteFromSupabase: (id: string) => Promise<boolean>;
   quotesList: Array<{ id: string; version: number; client_name: string; project_name: string; created_at: string }>;
+
+  // Authentication
+  isLoggedIn: boolean;
+  login: (user: string, pass: string) => boolean;
+  logout: () => void;
 }
 
 export const useQuoterStore = create<QuoterState>()(
@@ -397,6 +402,18 @@ export const useQuoterStore = create<QuoterState>()(
           return false;
         }
       },
+
+      isLoggedIn: false,
+      login: (user: string, pass: string) => {
+        const expectedUser = import.meta.env.VITE_APP_USERNAME || 'admin';
+        const expectedPass = import.meta.env.VITE_APP_PASSWORD || 'sipcon2026';
+        if (user === expectedUser && pass === expectedPass) {
+          set({ isLoggedIn: true });
+          return true;
+        }
+        return false;
+      },
+      logout: () => set({ isLoggedIn: false }),
     }),
     {
       name: 'saas-quoter-storage',

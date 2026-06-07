@@ -7,15 +7,18 @@ import { ExportModal } from './components/ExportModal';
 import { DatabasesModal } from './components/DatabasesModal';
 import { CostAuditModal } from './components/CostAuditModal';
 import { useQuoterStore } from './store/useQuoterStore';
+import { Login } from './components/Login';
 
 function App() {
-  const { currentQuoteId, currentQuoteVersion, startNewQuote, createVersion, fetchFromSupabase, fetchQuotesList, quotesList, loadQuoteFromSupabase, saveQuoteToSupabase } = useQuoterStore();
+  const { currentQuoteId, currentQuoteVersion, startNewQuote, createVersion, fetchFromSupabase, fetchQuotesList, quotesList, loadQuoteFromSupabase, saveQuoteToSupabase, isLoggedIn, logout } = useQuoterStore();
   const offerNumber = `${currentQuoteId}-V${currentQuoteVersion}`;
 
   useEffect(() => {
-    fetchFromSupabase();
-    fetchQuotesList();
-  }, []);
+    if (isLoggedIn) {
+      fetchFromSupabase();
+      fetchQuotesList();
+    }
+  }, [isLoggedIn]);
 
   const handleSaveDraft = () => {
     const state = useQuoterStore.getState();
@@ -44,6 +47,10 @@ function App() {
     window.addEventListener('save-draft', handleSaveDraft);
     return () => window.removeEventListener('save-draft', handleSaveDraft);
   }, [offerNumber]);
+
+  if (!isLoggedIn) {
+    return <Login />;
+  }
 
   return (
     <DashboardLayout>
@@ -125,6 +132,13 @@ function App() {
               className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95"
             >
               Export Proposal
+            </button>
+            <button 
+              onClick={logout}
+              className="px-4 py-2 bg-rose-50 border border-rose-200 text-rose-600 rounded-lg text-sm font-medium hover:bg-rose-100 hover:text-rose-700 transition-colors shadow-sm active:scale-95"
+              title="Cerrar sesión"
+            >
+              Logout
             </button>
           </div>
         </div>
