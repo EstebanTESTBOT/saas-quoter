@@ -1,7 +1,10 @@
 import React from 'react';
 import { Package, Search, Bell, Settings } from 'lucide-react';
+import { useQuoterStore } from '../store/useQuoterStore';
 
 export const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+  const logout = useQuoterStore((state) => state.logout);
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
@@ -34,7 +37,11 @@ export const DashboardLayout = ({ children }: { children: React.ReactNode }) => 
               <Bell className="w-5 h-5" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
             </button>
-            <button className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+            <button 
+              onClick={logout}
+              className="p-2 text-slate-400 hover:text-rose-500 transition-colors"
+              title="Cerrar sesión (Logout)"
+            >
               <Settings className="w-5 h-5" />
             </button>
             <div className="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
