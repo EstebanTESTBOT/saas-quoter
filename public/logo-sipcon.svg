@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" width="600" height="220">
+  <defs>
+    <!-- Green gradient for main text -->
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a6b3c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d5029;stop-opacity:1" />
+    </linearGradient>
+    <!-- Gold gradient for accent -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4a841;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#c9982e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8872a;stop-opacity:1" />
+    </linearGradient>
+    <!-- Clip for the O building design -->
+    <clipPath id="oClip">
+      <circle cx="458" cy="85" r="42"/>
+    </clipPath>
+  </defs>
+  
+  <!-- "GRUPO" text above -->
+  <text x="395" y="38" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-weight="bold" font-size="32" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="8">GRUPO</text>
+  
+  <!-- S -->
+  <text x="100" y="130" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-weight="900" font-size="120" fill="url(#greenGrad)" letter-spacing="2">S</text>
+  
+  <!-- I -->
+  <text x="170" y="130" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-weight="900" font-size="120" fill="url(#greenGrad)" letter-spacing="2">I</text>
+  
+  <!-- P -->
+  <text x="215" y="130" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-weight="900" font-size="120" fill="url(#greenGrad)" letter-spacing="2">P</text>
+  
+  <!-- C -->
+  <text x="300" y="130" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-weight="900" font-size="120" fill="url(#greenGrad)" letter-spacing="2">C</text>
+  
+  <!-- The decorative "O" - circle outline with building -->
+  <g transform="translate(395, 85)">
+    <!-- Outer circle (the O shape) -->
+    <circle cx="0" cy="0" r="44" fill="none" stroke="url(#greenGrad)" stroke-width="10"/>
+    
+    <!-- Building/construction design inside the O -->
+    <!-- Main building structure -->
+    <rect x="-18" y="-15" width="12" height="40" fill="url(#greenGrad)" rx="1"/>
+    <!-- Building windows -->
+    <rect x="-15" y="-10" width="3" height="4" fill="white" rx="0.5"/>
+    <rect x="-10" y="-10" width="3" height="4" fill="white" rx="0.5"/>
+    <rect x="-15" y="-2" width="3" height="4" fill="white" rx="0.5"/>
+    <rect x="-10" y="-2" width="3" height="4" fill="white" rx="0.5"/>
+    <rect x="-15" y="6" width="3" height="4" fill="white" rx="0.5"/>
+    <rect x="-10" y="6" width="3" height="4" fill="white" rx="0.5"/>
+    <rect x="-15" y="14" width="3" height="4" fill="white" rx="0.5"/>
+    <rect x="-10" y="14" width="3" height="4" fill="white" rx="0.5"/>
+    
+    <!-- Second building (shorter) -->
+    <rect x="-2" y="0" width="10" height="25" fill="url(#greenGrad)" rx="1"/>
+    <!-- Windows -->
+    <rect x="1" y="4" width="2.5" height="3" fill="white" rx="0.5"/>
+    <rect x="5" y="4" width="2.5" height="3" fill="white" rx="0.5"/>
+    <rect x="1" y="10" width="2.5" height="3" fill="white" rx="0.5"/>
+    <rect x="5" y="10" width="2.5" height="3" fill="white" rx="0.5"/>
+    <rect x="1" y="16" width="2.5" height="3" fill="white" rx="0.5"/>
+    <rect x="5" y="16" width="2.5" height="3" fill="white" rx="0.5"/>
+    
+    <!-- Crane/tower element -->
+    <rect x="12" y="-25" width="3" height="50" fill="url(#greenGrad)" rx="0.5"/>
+    <!-- Crane arm horizontal -->
+    <rect x="5" y="-25" width="22" height="3" fill="url(#greenGrad)" rx="0.5"/>
+    <!-- Crane hook line -->
+    <line x1="22" y1="-22" x2="22" y2="-12" stroke="url(#goldGrad)" stroke-width="1.5"/>
+    <!-- Crane hook -->
+    <path d="M 19,-12 Q 19,-9 22,-9 Q 25,-9 25,-12" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+    
+    <!-- Gold arc/swoosh around top -->
+    <path d="M -30,-30 Q -5,-50 25,-35" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  
+  <!-- N -->
+  <text x="470" y="130" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-weight="900" font-size="120" fill="url(#greenGrad)" letter-spacing="2">N</text>
+  
+  <!-- Subtitle -->
+  <text x="310" y="168" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-weight="700" font-size="16" fill="url(#greenGrad)" text-anchor="middle" letter-spacing="4">INGENIERÍA,  PLANIFICACIÓN Y CONSTRUCCIÓN</text>
+  
+  <!-- Decorative bottom line -->
+  <line x1="100" y1="180" x2="520" y2="180" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.6"/>
+</svg>
