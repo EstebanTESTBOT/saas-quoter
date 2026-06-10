@@ -33,7 +33,7 @@ export const Login = () => {
             <Lock className="w-8 h-8 text-indigo-400" />
           </div>
           <h2 className="text-2xl font-bold text-white tracking-wide text-center">
-            Sipcon Offer Builder
+            SIMEC Offer Builder
           </h2>
           <p className="text-slate-400 text-sm mt-1.5 text-center">
             Ingrese sus credenciales de acceso para continuar.
@@ -87,7 +87,7 @@ export const Login = () => {
         {/* Footer */}
         <div className="mt-8 text-center border-t border-white/5 pt-4">
           <p className="text-slate-500 text-xs">
-            © {new Date().getFullYear()} Sipcon. Todos los derechos reservados.
+            © {new Date().getFullYear()} SIMEC. Todos los derechos reservados.
           </p>
         </div>
       </div>

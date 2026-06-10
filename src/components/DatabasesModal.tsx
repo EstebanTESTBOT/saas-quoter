@@ -6,6 +6,7 @@ export const DatabasesModal = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { equipmentDB, materialDB, setLoadingEquipment, setLoadingMaterial } = useQuoterStore();
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [syncing, setSyncing] = useState(false);
 
     useEffect(() => {
         const handleOpen = () => setIsOpen(true);
@@ -59,6 +60,54 @@ export const DatabasesModal = () => {
         if (fileInputRef.current) fileInputRef.current.value = '';
     };
 
+    const handleSyncToCloud = async () => {
+        setSyncing(true);
+        try {
+            const { supabase } = await import('../lib/supabase');
+            
+            // Sync equipment
+            const eqArray = Object.values(equipmentDB);
+            for (const eq of eqArray) {
+                const { error } = await supabase.from('equipment_db').upsert({
+                    model: eq.model,
+                    brand: eq.brand,
+                    description: eq.description,
+                    cost: eq.cost,
+                    weight: eq.weight,
+                    length: eq.length,
+                    width: eq.width,
+                    height: eq.height,
+                    category: eq.category,
+                    lead_time: eq.leadTime,
+                    is_local_purchase: eq.isLocalPurchase || false,
+                    local_freight: eq.localFreight || 0,
+                    tax_overrides: eq.taxOverrides || {}
+                });
+                if (error) throw error;
+            }
+
+            // Sync materials
+            const matArray = Object.values(materialDB || {});
+            for (const mat of matArray) {
+                const { error } = await supabase.from('material_db').upsert({
+                    name: mat.name,
+                    unit: mat.unit,
+                    unit_price: mat.unitPrice,
+                    is_grouped: mat.isGrouped || false,
+                    lead_time: mat.leadTime
+                }, { onConflict: 'name' });
+                if (error) throw error;
+            }
+
+            alert('¡Toda la base de datos local se ha sincronizado y guardado en Supabase con éxito!');
+        } catch (err: any) {
+            console.error('Error syncing local DB to Supabase:', err);
+            alert(`Error al sincronizar con Supabase: ${err.message}`);
+        } finally {
+            setSyncing(false);
+        }
+    };
+
     if (!isOpen) return null;
 
     return (
@@ -89,6 +138,13 @@ export const DatabasesModal = () => {
                                 className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg transition-colors border border-indigo-200"
                             >
                                 <Upload className="w-3.5 h-3.5" /> Import DB
+                            </button>
+                            <button 
+                                onClick={handleSyncToCloud}
+                                disabled={syncing}
+                                className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-300 text-white text-xs font-semibold rounded-lg transition-colors border border-emerald-500 shadow-sm"
+                            >
+                                <Database className="w-3.5 h-3.5" /> {syncing ? 'Sincronizando...' : 'Subir a Supabase'}
                             </button>
                         </div>
                         <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-slate-600">

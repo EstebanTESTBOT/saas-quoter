@@ -406,7 +406,7 @@ export const useQuoterStore = create<QuoterState>()(
       isLoggedIn: false,
       login: (user: string, pass: string) => {
         const expectedUser = import.meta.env.VITE_APP_USERNAME || 'admin';
-        const expectedPass = import.meta.env.VITE_APP_PASSWORD || 'sipcon2026';
+        const expectedPass = import.meta.env.VITE_APP_PASSWORD || 'simec2026';
         if (user === expectedUser && pass === expectedPass) {
           set({ isLoggedIn: true });
           return true;

@@ -8,15 +8,15 @@ import { calculateChargeableWeight, calculateFreight, calculateTaxes, getTaxRate
 // ─── Default Terms & Conditions ────────────────────────────────────────────────
 const DEFAULT_TERMS = `1. Se respetarán los precios vigentes de la oferta al momento de recibir la orden de compra, sin embargo los precios de esta oferta están sujetos a cambios debido a las variaciones en costos de importación, fletes, seguros y tasas cambiarias.
 
-2. Grupo SIPCON, es responsable de la aplicación técnica siempre y cuando se cumpla con las recomendaciones y especificaciones técnicas emitidas por el fabricante.
+2. Grupo SIMEC, es responsable de la aplicación técnica siempre y cuando se cumpla con las recomendaciones y especificaciones técnicas emitidas por el fabricante.
 
-3. Grupo SIPCON, no es responsable de daños a terceros, si no que se limpia a los productos incluidos, ni tampoco de los trabajos que no estén contemplados por escrito en el presente documento. El cliente deberá velar que las especificaciones que presentado sean las adecuadas para su necesidad.
+3. Grupo SIMEC, no es responsable de daños a terceros, si no que se limita a los productos incluidos, ni tampoco de los trabajos que no estén contemplados por escrito en el presente documento. El cliente deberá velar que las especificaciones presentadas sean las adecuadas para su necesidad.
 
 4. Todos los materiales y equipos ofertados en esta oferta son nuevos y cuentan con garantía de fábrica, aplica a defectos de fabricación, no cubre daño por negligencia, mal uso o causas de fuerza mayor.
 
 5. Se debe disponer de un contacto designado por parte del cliente y contratista que servirá como referencia de los equipos en el proyecto.
 
-6. Los tiempos indicados son estimados en días hábiles partiendo desde la fecha de recepción de la orden de compra o firma del contrato, son susceptibles a retrasos logísticos fuera del control de Grupo SIPCON, como retrasos en aduanas o transporte internacional.
+6. Los tiempos indicados son estimados en días hábiles partiendo desde la fecha de recepción de la orden de compra o firma del contrato, son susceptibles a retrasos logísticos fuera del control de Grupo SIMEC, como retrasos en aduanas o transporte internacional.
 
 7. Los equipos ofrecidos son estándar del fabricante. Cualquier personalización requiere validación de fábrica y podría impactar precio y tiempo de entrega.
 
@@ -24,17 +24,17 @@ const DEFAULT_TERMS = `1. Se respetarán los precios vigentes de la oferta al mo
 
 9. Los precios de la oferta NO incluyen: adecuaciones civiles, eléctricas o mecánicas no especificadas, permisos y trámites municipales, trabajos fuera del horario regular de lunes a viernes de 7:00am a 5:00pm, impuestos adicionales no contemplados. Todo trabajo extraordinario será cotizado aparte.
 
-10. Toda propuesta de equipamiento es responsabilidad técnica de la empresa contratante, por lo cual en caso de que Grupo SIPCON evidencie en sitio diferencias, se requiere cambiar o adicionar/eliminar equipos para garantizar las condiciones comerciales del fabricante.
+10. Toda propuesta de equipamiento es responsabilidad técnica de la empresa contratante, por lo cual en caso de que Grupo SIMEC evidencie en sitio diferencias, se requiere cambiar o adicionar/eliminar equipos para garantizar las condiciones comerciales del fabricante.
 
-11. Los pagos se hacen mediante un trámite de 15 días hábiles a partir de la fecha de recepción de la factura electrónica con los soportes de entrega correspondientes y se realizan en colones o dólares, y mediante transferencia a Grupo SIPCON, al número de cuenta indicado en la factura.
+11. Los pagos se hacen mediante un trámite de 15 días hábiles a partir de la fecha de recepción de la factura electrónica con los soportes de entrega correspondientes y se realizan en colones o dólares, y mediante transferencia a Grupo SIMEC, al número de cuenta indicado en la factura.
 
-12. Grupo SIPCON, se reserva el derecho de suspender la entrega de los equipos o la prestación de servicios en caso de atraso en pagos de la factura emitida, sin perjuicio de acciones legales que procedan.
+12. Grupo SIMEC, se reserva el derecho de suspender la entrega de los equipos o la prestación de servicios en caso de atraso en pagos de la factura emitida, sin perjuicio de acciones legales que procedan.
 
-13. Todo pago de la oferta a Grupo SIPCON, tiene un tiempo de vigencia de 15 días naturales después de presentar la factura o recibido a satisfacción de la entrega de los productos o actualizados o anulados si fuera requerido.
+13. Todo pago de la oferta a Grupo SIMEC, tiene un tiempo de vigencia de 15 días naturales después de presentar la factura o recibido a satisfacción de la entrega de los productos o actualizados o anulados si fuera requerido.
 
 14. Se exige el uso de las hojas de trabajo de entrega, para registrar las entregas, los trabajos realizados, observaciones o información pertinente asociada para cada entrega.
 
-15. En caso de cancelación de órdenes de compra sin previo procedimiento, el cliente acepta una penalización que se le cobra como multa impuesta por Grupo SIPCON de los costos incurridos en el proceso.`;
+15. En caso de cancelación de órdenes de compra sin previo procedimiento, el cliente acepta una penalización que se le cobra como multa impuesta por Grupo SIMEC de los costos incurridos en el proceso.`;
 
 export const ExportModal = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -123,7 +123,7 @@ export const ExportModal = () => {
         const doc = new jsPDF();
         const pageW = 210;
         const pageH = 297;
-        const green: [number, number, number] = [0, 100, 60];
+        const simecBlue: [number, number, number] = [15, 139, 177];
         const darkText: [number, number, number] = [15, 23, 42];
         const grayText: [number, number, number] = [100, 116, 139];
 
@@ -138,17 +138,17 @@ export const ExportModal = () => {
                     canvas.height = img.naturalHeight;
                     const ctx = canvas.getContext('2d')!;
                     ctx.drawImage(img, 0, 0);
-                    resolve(canvas.toDataURL('image/png'));
+                    resolve(canvas.toDataURL('image/jpeg'));
                 };
                 img.onerror = reject;
                 img.src = imgUrl;
             });
         };
 
-        // Pre-load logo as PNG data URL
+        // Pre-load logo as JPEG data URL
         let logoDataUrl: string | null = null;
         try {
-            logoDataUrl = await loadImageAsDataUrl('/logoSIPCON2.PNG');
+            logoDataUrl = await loadImageAsDataUrl('/logoSIMEC.jpg');
         } catch(e) {
             console.warn('Could not load logo, using text fallback');
         }
@@ -158,17 +158,17 @@ export const ExportModal = () => {
         // ════════════════════════════════════════════════════════════════
         
         // Background subtle watermark
-        doc.setFillColor(245, 248, 245);
+        doc.setFillColor(245, 247, 250);
         doc.rect(0, 0, pageW, pageH, 'F');
         
         // Logo
         if (logoDataUrl) {
-            doc.addImage(logoDataUrl, 'PNG', 45, 40, 120, 44);
+            doc.addImage(logoDataUrl, 'JPEG', 83, 40, 44, 44);
         } else {
             doc.setFontSize(36);
-            doc.setTextColor(...green);
+            doc.setTextColor(...simecBlue);
             doc.setFont("helvetica", "bold");
-            doc.text("GRUPO SIPCON", pageW / 2, 70, { align: "center" });
+            doc.text("GRUPO SIMEC", pageW / 2, 70, { align: "center" });
             doc.setFontSize(12);
             doc.setTextColor(...grayText);
             doc.text("INGENIERÍA, PLANIFICACIÓN Y CONSTRUCCIÓN", pageW / 2, 82, { align: "center" });
@@ -180,8 +180,8 @@ export const ExportModal = () => {
         doc.setFont("helvetica", "normal");
         doc.text("Proyecto", pageW / 2, 125, { align: "center" });
 
-        // Green banner for client name
-        doc.setFillColor(...green);
+        // Blue banner for client name
+        doc.setFillColor(...simecBlue);
         doc.rect(20, 132, pageW - 40, 16, 'F');
         doc.setFontSize(20);
         doc.setTextColor(255, 255, 255);
@@ -207,15 +207,10 @@ export const ExportModal = () => {
         doc.setFontSize(10);
         doc.setTextColor(...darkText);
         doc.setFont("helvetica", "bold");
-        doc.text("GRUPO SIPCON", pageW / 2, 240, { align: "center" });
-        doc.setFontSize(9);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(...grayText);
-        doc.text("Razón Social: 3-102-955629 SRL", pageW / 2, 248, { align: "center" });
-        doc.text("Cédula Jurídica: 3-102-955629", pageW / 2, 254, { align: "center" });
+        doc.text("GRUPO SIMEC", pageW / 2, 248, { align: "center" });
 
-        // Bottom green line
-        doc.setDrawColor(...green);
+        // Bottom blue line
+        doc.setDrawColor(...simecBlue);
         doc.setLineWidth(2);
         doc.line(30, 270, pageW - 30, 270);
 
@@ -241,12 +236,12 @@ export const ExportModal = () => {
             doc.setFillColor(245, 248, 252);
             doc.rect(0, 0, pageW, 38, "F");
             if (logoDataUrl) {
-                doc.addImage(logoDataUrl, 'PNG', 14, 5, 45, 16.5);
+                doc.addImage(logoDataUrl, 'JPEG', 14, 5, 16.5, 16.5);
             } else {
                 doc.setFontSize(16);
-                doc.setTextColor(...green);
+                doc.setTextColor(...simecBlue);
                 doc.setFont("helvetica", "bold");
-                doc.text("GRUPO SIPCON", 14, 18);
+                doc.text("GRUPO SIMEC", 14, 18);
             }
             // Right side info
             doc.setFontSize(8);
@@ -263,8 +258,8 @@ export const ExportModal = () => {
                 doc.setFontSize(8);
                 doc.text(`Cliente: ${store.clientName}`, 196, 32, { align: "right" });
             }
-            // Green line
-            doc.setDrawColor(...green);
+            // Blue line
+            doc.setDrawColor(...simecBlue);
             doc.setLineWidth(0.8);
             doc.line(14, 38, 196, 38);
             // Footer
@@ -273,11 +268,11 @@ export const ExportModal = () => {
             doc.setTextColor(148, 163, 184);
             doc.text(`Página ${data.pageNumber} de ${pageCount}`, 196, 289, { align: "right" });
             // Footer line and company
-            doc.setDrawColor(200, 210, 200);
+            doc.setDrawColor(210, 215, 223);
             doc.setLineWidth(0.3);
             doc.line(14, 284, 196, 284);
             doc.setFontSize(7);
-            doc.text("GRUPO SIPCON | Razón Social: 3-102-955629 SRL | Cédula Jurídica: 3-102-955629", pageW / 2, 289, { align: "center" });
+            doc.text("GRUPO SIMEC", pageW / 2, 289, { align: "center" });
         };
 
         autoTable(doc, {
@@ -285,14 +280,14 @@ export const ExportModal = () => {
             head: [['Descripción', 'Cant.', 'Tiempo de Entrega', 'Precio Unitario', 'Precio Total']],
             body: tableBody,
             theme: 'striped',
-            headStyles: { fillColor: green, textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9, cellPadding: 4 },
+            headStyles: { fillColor: simecBlue, textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9, cellPadding: 4 },
             bodyStyles: { fontSize: 8.5, textColor: [60, 60, 60], cellPadding: 3.5 },
             columnStyles: {
                 0: { cellWidth: 70 },
                 3: { halign: 'right' },
                 4: { halign: 'right' },
             },
-            alternateRowStyles: { fillColor: [248, 250, 248] },
+            alternateRowStyles: { fillColor: [248, 250, 252] },
             margin: { top: 48, left: 14, right: 14, bottom: 30 },
             didDrawPage: drawContentHeader
         });
@@ -310,10 +305,10 @@ export const ExportModal = () => {
                 cursorY += 10;
             }
             doc.setFontSize(12);
-            doc.setTextColor(...green);
+            doc.setTextColor(...simecBlue);
             doc.setFont("helvetica", "bold");
             doc.text("Condiciones Comerciales", 14, cursorY);
-            doc.setDrawColor(...green);
+            doc.setDrawColor(...simecBlue);
             doc.setLineWidth(0.3);
             doc.line(14, cursorY + 2, 100, cursorY + 2);
             doc.setFontSize(9);
@@ -339,10 +334,10 @@ export const ExportModal = () => {
                 cursorY2 = 48;
             }
             doc.setFontSize(12);
-            doc.setTextColor(...green);
+            doc.setTextColor(...simecBlue);
             doc.setFont("helvetica", "bold");
             doc.text("Notas", 14, cursorY2);
-            doc.setDrawColor(...green);
+            doc.setDrawColor(...simecBlue);
             doc.setLineWidth(0.3);
             doc.line(14, cursorY2 + 2, 40, cursorY2 + 2);
             doc.setFontSize(9);
@@ -360,11 +355,11 @@ export const ExportModal = () => {
 
         // Logo small + Title
         doc.setFontSize(14);
-        doc.setTextColor(...green);
+        doc.setTextColor(...simecBlue);
         doc.setFont("helvetica", "bold");
         doc.text("Términos y condiciones de venta", pageW / 2, 52, { align: "center" });
 
-        doc.setDrawColor(...green);
+        doc.setDrawColor(...simecBlue);
         doc.setLineWidth(0.5);
         doc.line(50, 54, pageW - 50, 54);
 
@@ -426,8 +421,8 @@ export const ExportModal = () => {
                     {activeTab === 'config' && (
                         <>
                             {/* Cover Page Info */}
-                            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 space-y-4">
-                                <h3 className="text-sm font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-2">
+                            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 space-y-4">
+                                <h3 className="text-sm font-bold text-blue-800 uppercase tracking-wider flex items-center gap-2">
                                     <FileText className="w-4 h-4" /> Portada de la Oferta
                                 </h3>
                                 <div className="grid grid-cols-2 gap-4">
@@ -437,7 +432,7 @@ export const ExportModal = () => {
                                             value={store.clientName}
                                             onChange={(e) => store.setClientName(e.target.value)}
                                             placeholder="Nombre del cliente..."
-                                            className="w-full h-10 px-3 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
+                                            className="w-full h-10 px-3 rounded-lg border border-blue-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-sm"
                                         />
                                     </div>
                                     <div className="space-y-1.5">
@@ -446,7 +441,7 @@ export const ExportModal = () => {
                                             value={store.projectName}
                                             onChange={(e) => store.setProjectName(e.target.value)}
                                             placeholder="Suministro e instalación de..."
-                                            className="w-full h-10 px-3 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
+                                            className="w-full h-10 px-3 rounded-lg border border-blue-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-sm"
                                         />
                                     </div>
                                 </div>
@@ -460,7 +455,7 @@ export const ExportModal = () => {
                                     onChange={(e) => store.setCommercialNotes(e.target.value)}
                                     placeholder="Forma de pago, vigencia de la oferta, garantías específicas, condiciones de entrega..."
                                     rows={4}
-                                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none text-sm text-slate-700 resize-y bg-slate-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-sm text-slate-700 resize-y bg-slate-50"
                                 />
                                 <p className="text-xs text-slate-400">Se incluirá después de la tabla de precios.</p>
                             </div>
@@ -525,7 +520,7 @@ export const ExportModal = () => {
                                 </tr>
                                 <tr>
                                     <td colSpan={4} className="py-4 px-4 text-right text-lg">Total con IVA:</td>
-                                    <td className="py-4 px-4 text-right font-mono text-xl text-emerald-700">${finalTotalWithIva.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                                    <td className="py-4 px-4 text-right font-mono text-xl text-blue-700">${finalTotalWithIva.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -537,12 +532,12 @@ export const ExportModal = () => {
                         onClick={handleCopy}
                         className="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition-colors flex items-center gap-2"
                     >
-                        {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                        {copied ? <Check className="w-4 h-4 text-blue-500" /> : <Copy className="w-4 h-4" />}
                         {copied ? 'Copiado' : 'Copiar Datos'}
                     </button>
                     <button 
                         onClick={handleExportPDF}
-                        className="px-5 py-2.5 bg-emerald-700 text-white rounded-lg font-medium hover:bg-emerald-800 transition-colors flex items-center gap-2 shadow-sm shadow-emerald-500/20"
+                        className="px-5 py-2.5 bg-blue-700 text-white rounded-lg font-medium hover:bg-blue-800 transition-colors flex items-center gap-2 shadow-sm shadow-blue-500/20"
                     >
                         <Download className="w-4 h-4" />
                         Exportar PDF Completo
